@@ -17,7 +17,7 @@ class GenerateTestData {
     const SE_LATITUDE = 37.4832233; // north west 南東
     const SE_LONGITUDE = 139.9542452; // north west 南東
 
-    const MAX_POINT = 50000;
+    const MAX_POINT = 500;
 
     const Dividing = 5;
 
@@ -81,10 +81,9 @@ class GenerateTestData {
 }
 
 class SasukeneRow {
-    public $name = 'hoge';
     public $geo;
-//    public $type;
-//    public $status;
+    public $type;
+    public $status;
 }
 
 

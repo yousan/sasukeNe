@@ -8,12 +8,14 @@ $(function(){
 
 $('.btn').on('submit', function(e){
     console.log('hoge');
-    alert('hoge');
-    search();
+    var current = new CurrentPoint();
+    current.geopoint.latitude  = 37.50484175;
+    current.geopoint.longitude = 139.9230243;
+    current.distance = 5;
+    search(current);
 });
 $('.btn').on('click', function(e){
     console.log('hoge');
-    //alert('hoge');
     search();
 });
 
@@ -22,8 +24,6 @@ var onSuccess = function(position){
     var current = new CurrentPoint();
     current.distance = CurrentPoint.distance;   //検索範囲の半径を保持する    
     current.geopoint = position.coords;         //位置情報を保存する
-    current.distance = 5;
-    current.geopoint = [35.707438,139.774632];
     search(current);
 };
 
@@ -53,10 +53,10 @@ function CurrentPoint(){
 function search(current){
     //var current.geopoint = new NCMB.GeoPoint(35.707438,139.774632);
     //位置情報を検索するクラスのNCMB.Objectを作成する
-    var SpotClass = NCMB.Object.extend("Spot");
+    var SasukeneClass = NCMB.Object.extend("sasukene");
 
     //NCMB.Queryを作成
-    var query = new NCMB.Query(SpotClass);
+    var query = new NCMB.Query(SasukeneClass);
     //位置情報をもとに検索する条件を設定
     //var geoPoint = new NCMB.GeoPoint(current.geopoint.latitude,current.geopoint.longitude);
     //var geoPoint = new NCMB.GeoPoint(current.geopoint.latitude,current.geopoint.longitude);
