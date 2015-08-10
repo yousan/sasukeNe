@@ -7,7 +7,8 @@
  */
 
 $generateTestData = new generateTestData();
-$generateTestData->generate();
+$generateTestData->remap();
+//$generateTestData->generate();
 
 class GenerateTestData {
 
@@ -19,17 +20,42 @@ class GenerateTestData {
 
     const MAX_POINT = 500;
 
+    const Unity_NW_X_Pos = 47.94;
+    const Unity_NW_Z_Pos = -33.27;
+
+    const Unity_SE_X_Pos = -47.94;
+    const Unity_SE_Z_Pos = 33.27;
+
     const Dividing = 5;
 
-    /** @var Geopoint[] */
+    /** @var GeoPoint[] */
     private $juus = array();
 
-    /** @var  Geopoint */
+    /** @var  GeoPoint */
     private $NW_point;
 
-    /** @var  Geopoint */
+    /** @var  GeoPoint */
     private $SE_point;
 
+    public function remap() {
+        $height = 47.94;
+        $width = 33.27;
+
+
+        echo $this->getRated(37.5264602, 37.4832233,
+                0, 47.94*2, 37.51000
+        ) ."\n";
+        echo $this->getRated(37.5264602, 37.4832233,
+            0, 47.94, 37.51000
+        )."\n";
+    }
+
+    private function getRated($originalStart, $originalEnd,
+                              $targetStart, $targetEnd,
+                              $original) {
+        $pu = ($originalEnd - $original) / ($originalEnd - $originalStart);
+        return $pu * ($targetEnd - $targetStart);
+    }
 
     private function getWidth() {
         return self::NW_LONGITUDE - self::SE_LONGITUDE;
