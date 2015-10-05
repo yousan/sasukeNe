@@ -127,8 +127,9 @@ server.on('request',function(req,res){
                         data.push({
                             objectId: point.get("objectId"),
                             geo     : point.get("geo"),
-                            type    : point.get("type"),
-                            status  : point.get("status")
+                            kind    : point.get("kind"),
+                            status  : point.get("status"),
+                            date    : point.get("updateDate")
                         });
 
                     }
