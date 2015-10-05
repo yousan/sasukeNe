@@ -92,8 +92,8 @@ server.on('request',function(req,res){
 
                         for( var jx = 0; jx < zipcode.length; jx++ ){
                             if( url_parts.query['zipcode'] == zipcode[ jx ][ 0 ]){
-                                lat = zipcode[ jx ][ 1 ];
-                                lng = zipcode[ jx ][ 2 ];
+                                lat = parseFloat( zipcode[ jx ][ 1 ] );
+                                lng = parseFloat( zipcode[ jx ][ 2 ] );
                                 console.log( lat, lng );
                                 break;
                             }
@@ -198,8 +198,8 @@ server.on('request',function(req,res){
                         var  jx;
                         for( jx = 0; jx < zipcode.length; jx++ ){
                             if( url_parts.query['zipcode'] == zipcode[ jx ][ 0 ]){
-                                lat = zipcode[ jx ][ 1 ];
-                                lng = zipcode[ jx ][ 2 ];
+                                lat = parseFloat( zipcode[ jx ][ 1 ] );
+                                lng = parseFloat( zipcode[ jx ][ 2 ] );
                                 console.log( lat, lng );
                                 break;
                             }
@@ -308,8 +308,8 @@ server.on('request',function(req,res){
                         var  jx;
                         for( jx = 0; jx < zipcode.length; jx++ ){
                             if( url_parts.query['zipcode'] == zipcode[ jx ][ 0 ]){
-                                lat = zipcode[ jx ][ 1 ];
-                                lng = zipcode[ jx ][ 2 ];
+                                lat = parseFloat( zipcode[ jx ][ 1 ] );
+                                lng = parseFloat( zipcode[ jx ][ 2 ] );
                                 console.log( lat, lng );
                                 break;
                             }
