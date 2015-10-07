@@ -7,6 +7,41 @@ Description: In 2014, our default theme lets you create a responsive magazine we
 Version: 1.5
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Template: twentyfourteen
+Template: twentyfifteen
 */
 
+
+
+.site-content .entry-header,
+.site-content .entry-content,
+.site-content .entry-summary,
+.site-content .entry-meta,
+.page-content {
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+div.badvalue {
+    color: red;
+}
+
+@media screen and (min-width: 59.6875em) {
+    /* remove sidebar */
+    body:before {
+        display: none;
+    }
+
+
+    .site-content {
+        display: block;
+        float: none;
+        margin: 0 5px;
+        width: 100%;
+    }
+
+    .site-footer {
+        float: none;
+        margin: 0 5px;
+        width: 100%;
+    }
+}
