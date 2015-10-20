@@ -4,6 +4,10 @@ var qs   = require('querystring');
 var csv  = require('csv');
 var fs   = require('fs');
 
+var sendgrid   = require('sendgrid')('sga7o8ih@kke.com', 'sasukene_aizu0');
+var email      = new sendgrid.Email();
+
+
 var zip_path = 'latlong.csv';
 var zipcode = [];
 
@@ -98,6 +102,19 @@ server.on('request',function(req,res){
                                 break;
                             }
                         }
+                    }
+
+                    // メール送信
+                    if( url_parts.query['zipcode'] == 9650817 ){
+                        email.setTos("yaritsusozai@gmail.com");
+                        email.setFrom("info@sasukene.jp");
+                        email.setSubject('出陣依頼！');
+                        email.setText('君のエリアに、助けを求める町民がいるぞ！いざ、雪かきに出動じゃ！');
+                         
+                        sendgrid.send(email, function(err, json) {
+                          if (err) { return console.error(err); }
+                          console.log(json);
+                        });
                     }
                 }
             }

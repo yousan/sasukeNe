@@ -32,7 +32,7 @@ get_header('register'); ?>
 				$form = str_replace( $arr, '', $form );
 				echo $form;
 				?>
-				<div id="map_canvas" style="margin: 10px; width:100%; height:500px"></div>
+				<div id="map_canvas"></div>
 
 				<?php
 				wp_link_pages( array(

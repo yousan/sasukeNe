@@ -25,6 +25,42 @@ div.badvalue {
     color: red;
 }
 
+
+#map_canvas{
+    margin: 10px;
+    width:97%;
+    height:500px
+}
+
+
+/** 市川のぞみさんから **/
+button,
+input {
+       -webkit-hyphens: none;
+       -moz-hyphens: none;
+       -ms-hyphens: none;
+       hyphens: none;
+    line-height: normal;
+}
+
+.social-navigation a[href*="path.com"]:before {
+        content: "\f219";
+ }
+
+.social-navigation a[href*="skype.com"]:before {
+       content: "\f220";
+}
+
+/** wp membersの上書き **/
+#wpmem_reg .div_text,
+#wpmem_reg .div_textarea,
+#wpmem_reg .div_select,
+#wpmem_login .div_text,
+#wpmem_reg .div_checkbox {
+    width: 100% !important;
+}
+
+
 @media screen and (min-width: 59.6875em) {
     /* remove sidebar */
     body:before {
@@ -46,20 +82,10 @@ div.badvalue {
     }
 }
 
-
-button,
-input {
-       -webkit-hyphens: none;
-       -moz-hyphens: none;
-       -ms-hyphens: none;
-       hyphens: none;
-    line-height: normal;
-}
-
-.social-navigation a[href*="path.com"]:before {
-        content: "\f219";
- }
-
-.social-navigation a[href*="skype.com"]:before {
-       content: "\f220";
+@media screen and (max-width: 38.75em) {
+    #map_canvas{
+        margin: 3px;
+        width: 97%;
+        height: 200px
+    }
 }
