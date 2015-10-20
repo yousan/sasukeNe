@@ -15,11 +15,8 @@ add_action( 'wp_enqueue_scripts', function() {
  * JSファイルを読み込ませる
  */
 add_action( 'wp_enqueue_scripts', function() {
-    $pagename = get_query_var('pagename');
-    if (get_query_var('pagename') == 'register') {
-        wp_enqueue_script( $pagename, get_bloginfo('stylesheet_directory').'/js/'.$pagename.'.js', array('jquery'), '1.0');
-        wp_enqueue_script('maps.google', 'http://maps.google.com/maps/api/js?sensor=false');
-    }
+    wp_enqueue_script( 'register', get_bloginfo('stylesheet_directory').'/js/'.'register'.'.js', array('jquery'), '1.0');
+    wp_enqueue_script('maps.google', 'http://maps.google.com/maps/api/js?sensor=false');
     if ($pagename = get_query_var('pagename')) {
         if (file_exists(get_stylesheet_directory().'/js/'.$pagename.'.js')) {
             wp_enqueue_script( $pagename, get_bloginfo('stylesheet_directory').'/js/'.$pagename.'.js', array('jquery'), '1.0', 'true');

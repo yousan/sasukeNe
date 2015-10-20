@@ -73,6 +73,8 @@ function updateLatLng() {
     })(jQuery);
 }
 
+
+// 初期設定
 (function($){
     $(document).ready(function(){
         (function() { // ユーザ名、メールアドレスをかくしてメールアドレスを自動で埋める
@@ -84,22 +86,14 @@ function updateLatLng() {
                 $('#user_email').hide(); // ユーザー名のinput なぜlog...?
             })();
 
-            $('#phone1').on('change', function(ele) {
-                var target_id = $(ele.target).prop('id');
-                var target = $('#'+target_id);
+            (function() { // 自動で埋める
+                var phone = this.value;
+                var email = this.value + '@sasukene.info';
+                $('#log').val(phone);
+                $('#user_email').val(email); // ユーザー名のinput なぜlog...?
+                //console.log(ele);
+            })();
 
-                toHankaku(target);
-                removeHyphen(target);
-                checkPhone(target);
-
-                (function() { // 自動で埋める
-                    var phone = this.value;
-                    var email = this.value + '@sasukene.info';
-                    $('#log').val(phone);
-                    $('#user_email').val(email); // ユーザー名のinput なぜlog...?
-                    //console.log(ele);
-                })();
-            });
         })();
 
 
@@ -112,55 +106,45 @@ function updateLatLng() {
             initialize();
         })();
 
-        (function() { // 地図の初期化関連
-            $('#geocode').attr('readonly', true);
-            $('#geocode').parent().attr('id', 'geocode_parent'); // 地図と連動させるためにgeocode_parentで包む
-            $('#geocode').hide();
-            jQuery('#map_canvas').appendTo('#geocode_parent');
-            initialize();
-        })();
-
-        $('#phone1').val('０１２３４').trigger('change');
+        $('#phone1').val('０１２３４').trigger('change'); // テストコード
 
     });
 
     (function() {
-            //jQuery('input[type=text]').each(function(i){
-        jQuery('input[type=text]').each(function(i){
-            var ele;
-            if (ele = $(this).attr('id').match(/^phone/)) {
-                console.log(ele.input); // phone1など
-                var parent_id = ele.input + '_parent';
-                var bad = $('<div>')
-                    .attr('id', ele.input+'_bad')
-                    .attr('class', 'badvalue')
-                    .html('電話番号の形式が間違っているようです。ハイフン無しの数字で入力してください。');
-                $(this).parent().attr('id', parent_id);
-                bad.appendTo('#'+parent_id);
-                bad.hide();
-                console.log(ele);
-            }
-            //$(this);
-        });
+        setTimeout(function() { // settimeoutを仕掛けておかないと動かない
+            jQuery(":input[type=text]").each(function (i) {
+                var ele; // ele = [phone1, phone2, phone3, phone4];
+                if (ele = $(this).attr('id').match(/^phone/)) {
+                    $(ele).on('change', function(ele) {
+                        var target_id = $(ele.target).prop('id');
+                        var target = $('#'+target_id);
+                        toHankaku(target);
+                        removeHyphen(target);
+                        checkPhone(target);
 
-        //for(var i=1; i<10; i++){
-        //    var ele = $('#phone'+ i);
-        //    console.log(ele);
-        //    if (ele) {
-        //        var parent_id = 'phone'+i+'_parent';
-        //        var bad = $('<div>').attr('class', 'badvalue').html('電話番号の形式が間違っているようです。ハイフン無しの数字で入力してください。');
-        //        ele.parent().attr('id', parent_id);
-        //        bad.appendTo('#'+parent_id);
-        //    }
-        //}
-        //var bad = $('<div>').attr('class', 'badvalue').html('電話番号の形式が間違っているようです。ハイフン無しの数字で入力してください。');
-        //$('#phone1').parent().attr('id', 'phone1_parent');
-        //bad.appendTo('#phone1_parent');
-
+                    });
+                    registerBadMessage(ele);
+                }
+            });
+        }, 1000);
     })();
 
 })(jQuery);
 
+
+// 電話番号形式が間違っていたときに登録する
+function registerBadMessage(ele) { (function($){
+    var parent_id = ele.input + '_parent';
+    var bad = $('<div>')
+        .attr('id', ele.input + '_bad')
+        .attr('class', 'badvalue')
+        .html('電話番号の形式が間違っているようです。ハイフン無しの数字で入力してください。');
+    $(this).parent().attr('id', parent_id);
+    console.log(parent_id);
+    bad.appendTo('#' + parent_id);
+    //bad.hide();
+    console.log(bad);
+}(jQuery));}
 
 function toHankaku(target) {
     // zenkaku -> hankaku
@@ -178,10 +162,13 @@ function removeHyphen(ele) {
 }
 
 function checkPhone(ele) {
+    var elementName = ele.attr('id') + '_bad';
     (function ($){
         if(ele.val().match(/^[0-9]+$/)) { // 電話番号形式だった
-            return true;
+            $('#'+elementName).hide();
         } else { // 形式が間違っていた
+            $('#'+elementName).show();
         }
+        return;
     })(jQuery);
 }
