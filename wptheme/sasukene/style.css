@@ -32,6 +32,26 @@ div.badvalue {
     height:500px
 }
 
+div.to_register a {
+    width: 280px;
+    background-color: rgb(136, 23, 28);
+    border-radius: 3px;
+    box-shadow: 0 3px 0 rgba(136, 23, 28, 1);
+    color: #ffffff;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    margin: 10px auto;
+    padding: 10px 0;
+}
+div.to_register a:hover {
+    box-shadow: 0 1px 0 rgb(136, 23, 28);
+    margin: 12px auto 8px;
+}
+
+
 
 /** 市川のぞみさんから **/
 button,
