@@ -25,3 +25,14 @@
 <div id="page" class="hfeed site">
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentyfifteen' ); ?></a>
 	<div id="content" class="site-content">
+		<?php if ( has_nav_menu( 'primary' ) ) : ?>
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<?php
+			// Primary navigation menu.
+			wp_nav_menu( array(
+				'menu_class'     => 'nav-menu',
+				'theme_location' => 'primary',
+			) );
+			?>
+		</nav><!-- .main-navigation -->
+<?php endif; ?>
