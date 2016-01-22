@@ -20,7 +20,7 @@ get_header('register'); ?>
       </header><!-- .entry-header -->
       <div class="entry-content">
 
-        <p>TELL：050-3131-8632</p>
+        <p>TEL：050-3131-8632</p>
         <h2>1. 電話で除雪してほしい場所を連絡！</h2>
         <p>　　案内が流れたら自分の電話番号をプッシュ！<br>
           ※電話番号が登録されていない場合は、郵便番号をプッシュしてね。</p>
