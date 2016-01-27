@@ -32,7 +32,9 @@ div.badvalue {
     height:500px
 }
 
-div.to_register a {
+div.to_register a,
+div.viwer a
+{
     width: 280px;
     background-color: rgb(136, 23, 28);
     border-radius: 3px;

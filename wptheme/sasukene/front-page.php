@@ -38,6 +38,7 @@ get_header('register'); ?>
           　　戊辰戦争2.0の画面で地域ごとの功績が見られるよ！<br>
         </p>
           <div class="to_register"><a href="/register/">電話番号を登録!</a></div>
+        <div class="viwer"><a href="/viewer/">除雪要請地点を確認する (さすけろビューア)</a></div>
       </div><!-- .entry-content -->
     </article><!-- #post-## -->
   </main><!-- .site-main -->
