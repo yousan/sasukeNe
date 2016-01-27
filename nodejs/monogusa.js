@@ -312,7 +312,7 @@ server.on('request',function(req,res){
 
 
                     console.log( url_parts.query['lat'], url_parts.query['long'], url_parts.query['kind'] );
-                }else　if( ( url_parts.query['zipcode'] != null ) &6 ( url_parts.query['kind'] != null )  ){
+                }else　if( ( url_parts.query['zipcode'] != null ) && ( url_parts.query['kind'] != null )  ){
                     console.log( url_parts.query['zipcode'] );
                     //////////////////////////
                     // 郵便番号の場合
