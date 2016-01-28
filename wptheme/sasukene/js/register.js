@@ -73,11 +73,100 @@ function updateLatLng() {
     })(jQuery);
 }
 
+
+// 初期設定
 (function($){
     $(document).ready(function(){
-        $('#geocode').attr('readonly', true);
-        $('#geocode').parent().attr('id', 'geocode_parent');
-        jQuery('#map_canvas').appendTo('#geocode_parent');
-        initialize();
+        (function() { // ユーザ名、メールアドレスをかくしてメールアドレスを自動で埋める
+            (function() {
+                $('label[for=username]').hide(); // ユーザー名のラベル
+                $('#log').hide(); // ユーザー名のinput なぜlog...?
+
+                $('label[for=user_email]').hide(); // ユーザー名のラベル
+                $('#user_email').hide(); // ユーザー名のinput なぜlog...?
+
+                $('#phone1').on('change', function (ele) { // phone1はユーザ名に利用
+                    var phone = this.value;
+                    var email = this.value + '@sasukene.info';
+                    $('#log').val(phone);
+                    $('#user_email').val(email); // ユーザー名のinput なぜlog...?
+                });
+            })();
+        })();
+
+
+
+        (function() { // 地図の初期化関連
+            $('#geocode').attr('readonly', true);
+            $('#geocode').parent().attr('id', 'geocode_parent'); // 地図と連動させるためにgeocode_parentで包む
+            $('#geocode').hide();
+            jQuery('#map_canvas').appendTo('#geocode_parent');
+            initialize();
+        })();
+
+
     });
+
+    (function() {
+        setTimeout(function() { // settimeoutを仕掛けておかないと動かない
+            jQuery(":input[type=text]").each(function (i) {
+                var ele; // ele = [phone1, phone2, phone3, phone4];
+                if (ele = $(this).attr('id').match(/^phone/)) {
+                    $(this).on('change', function(ele) {
+                        var target_id = $(ele.target).prop('id');
+                        var target = $('#'+target_id);
+                        toHankaku(target);
+                        removeHyphen(target);
+                        checkPhone(target);
+
+                    });
+                    registerBadMessage(ele);
+                }
+            });
+            $('#phone1').val('０１２３４').trigger('change'); // テストコード
+        }, 1000);
+    })();
+
 })(jQuery);
+
+
+// 電話番号形式が間違っていたときに登録する
+function registerBadMessage(ele) { (function($){
+    var parent_id = ele.input + '_parent';
+    var bad = $('<div>')
+        .attr('id', ele.input + '_bad')
+        .attr('class', 'badvalue')
+        .html('電話番号の形式が間違っているようです。ハイフン無しの数字で入力してください。');
+    $('#'+ele.input).parent().attr('id', parent_id); // wp membersだと親要素にIDがないので追加してやる
+    bad.appendTo('#' + parent_id);
+    bad.hide();
+}(jQuery));}
+
+function toHankaku(target) {
+    // zenkaku -> hankaku
+    // thanks! http://qiita.com/konweb/items/bdff25e7994f8014adcf
+    var han = target.val().replace(/[Ａ-Ｚａ-ｚ０-９]/g,function(s){return String.fromCharCode(s.charCodeAt(0)-0xFEE0)});
+    if(target.val().match(/[Ａ-Ｚａ-ｚ０-９]/g)){
+        //console.log(target.val());
+        //console.log(han);
+        target.val(han);
+    }
+}
+
+// ハイフンを取り除く
+function removeHyphen(ele) {
+    ele.val(ele.val().replace(/-/g, '')); // ハイフンを取り除く
+}
+
+// 電話番号形式が正しいかチェック
+function checkPhone(ele) {
+    var elementName = ele.attr('id') + '_bad';
+    (function ($){
+        if(ele.val().match(/^[0-9]+$/)) { // 電話番号形式だった
+            $('#'+elementName).hide();
+        } else { // 形式が間違っていた
+            $('#'+elementName).show();
+        }
+        return;
+    })(jQuery);
+}
